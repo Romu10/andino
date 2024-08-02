@@ -1,5 +1,6 @@
 {
     "name": "Andino",
+    "privileged": true,
     "build": {
                 "context": "../",
                 "dockerfile": "../docker/Dockerfile",
@@ -30,7 +31,7 @@
     ],
     "runArgs": [
         "--hostname=${localEnv:HOST_HOSTNAME}",
-        "--name=andino",
+        "--name=ros2_humble_andino_container",
         "--gpus=all",
         "--runtime=nvidia",
         "--env=NVIDIA_VISIBLE_DEVICES=all",
