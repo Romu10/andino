@@ -5,8 +5,8 @@
                 "context": "../",
                 "dockerfile": "../docker/Dockerfile",
                 "args": {
-                        "USERID": "${localEnv:USER_UID:-1000}",
-                        "USER": "${localEnv:USER:-defaultuser}"
+                        "USERID": "${localEnv:USER_UID:1000}",
+                        "USER": "${localEnv:USER:ekumendev}"
                     }
             },
 
