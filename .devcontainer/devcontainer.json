@@ -5,8 +5,8 @@
                 "context": "../",
                 "dockerfile": "../docker/Dockerfile",
                 "args": {
-                        "USERID": "${localEnv:USER_UID}",
-                        "USER": "${localEnv:USER}"
+                        "USERID": "${localEnv:USER_UID:1000}",
+                        "USER": "${localEnv:USER:ekumendev}"
                     }
             },
 
@@ -31,14 +31,16 @@
         "source=${localEnv:HOME}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind"
     ],
     "runArgs": [
-        "--hostname=${localEnv:HOST_HOSTNAME}",
+        "--hostname=${localEnv:HOSTNAME:ekumendev}",
         "--name=ros2_humble_andino_container",
         "--gpus=all",
-        "--runtime=nvidia",
-        "--env=NVIDIA_VISIBLE_DEVICES=all",
         "--env=DISPLAY=${localEnv:DISPLAY}",
         "--env=XDG_RUNTIME_DIR=${localEnv:XDG_RUNTIME_DIR}",
-        "--env=QT_X11_NO_MITSHM=1"
+        "--runtime=nvidia",
+        "--env=QT_X11_NO_MITSHM=1",
+        "--env=NVIDIA_VISIBLE_DEVICES=all",
+        "--env=NVIDIA_VISIBLE_DEVICES=all",
+        "--env=NVIDIA_DRIVER_CAPABILITIES=compute,utility,video"
     ],
     "workspaceFolder": "/home/${localEnv:USER}/ws",
     "postCreateCommand": "/bin/bash -c 'rosdep install --from-paths src --ignore-src -i -y && colcon build && source install/setup.bash'",
@@ -47,7 +49,8 @@
 
 // REMINDER 
 // Please run xhost +local:docker on your host machine.
+
 // Add the following line to .bashrc:
 //  export USER_UID=$(id -u)
 //  export USER=$(whoami)
-//  export HOST_HOSTNAME=$(hostname)
+//  export HOSTNAME=$(hostname)
