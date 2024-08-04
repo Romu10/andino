@@ -27,7 +27,8 @@
     },
     "mounts": [
         "source=${localWorkspaceFolder},target=/home/${localEnv:USER}/ws/src,type=bind",
-        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+        "source=${localEnv:HOME}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind"
     ],
     "runArgs": [
         "--hostname=${localEnv:HOST_HOSTNAME}",
